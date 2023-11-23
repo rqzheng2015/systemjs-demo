@@ -1,0 +1,16 @@
+{
+  "name": "systemjs-demo",
+  "type": "module",
+  "devDependencies": {
+    "npm-run-all": "^4.1.5",
+    "rollup": "^4.5.1",
+    "serve": "^14.2.1"
+  },
+  "scripts": {
+    "build": "npm run deleteDist && rollup -c",
+    "deleteDist": "rm -rf public/module && rm -rf public/nomodule",
+    "watch": "rollup -c -w",
+    "start": "serve public",
+    "dev": "run-p watch start"
+  }
+}
