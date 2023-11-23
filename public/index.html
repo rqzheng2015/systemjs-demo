@@ -27,7 +27,7 @@
     <div data-used-by='b'></div>
     <div data-used-by='both'></div>
 </div>
-<script src="https://unpkg.com/vconsole@latest/dist/vconsole.min.js"></script>
+<script src="https://unpkg.com/vconsole@3.3.4/dist/vconsole.min.js"></script>
 <script>
     new window.VConsole();
 </script>
@@ -87,7 +87,7 @@
         if (!window.supportsDynamicImport) {
             methodDocument.innerText = "Switching to SystemJS";
             var systemJsLoaderTag = document.createElement('script');
-            systemJsLoaderTag.src = 'https://unpkg.com/systemjs@6.14.2/dist/s.min.js';
+            systemJsLoaderTag.src = 'https://unpkg.com/systemjs@latest/dist/s.min.js';
             systemJsLoaderTag.addEventListener('load', function () {
                 System.import('./nomodule/main-a.js');
                 System.import('./nomodule/main-b.js');
