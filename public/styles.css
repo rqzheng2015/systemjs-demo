@@ -27,3 +27,7 @@ body > div {
 	height: 6em;
 	border-radius: 2px;
 }
+
+#errorMessage{
+	color:red;
+}
