@@ -11,7 +11,8 @@
     "build": "npm run deleteDist && rollup -c",
     "deleteDist": "rm -rf public/module && rm -rf public/nomodule",
     "watch": "rollup -c -w",
-    "start": "http-server",
-    "dev": "run-p watch start"
+    "serve": "http-server",
+    "dev": "run-p watch serve",
+    "start": "run-s build serve"
   }
 }
