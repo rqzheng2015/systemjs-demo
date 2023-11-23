@@ -14,6 +14,7 @@
 
 	<p><a href='https://github.com/rollup/rollup-starter-code-splitting'>See the source code on GitHub</a></p>
 	<p id="method"></p>
+	<p id="webviewVersion"></p>
 	<div id='a'>
 		<div data-used-by='a'></div>
 		<div data-used-by='both'></div>
@@ -24,6 +25,44 @@
 		<div data-used-by='both'></div>
 	</div>
 
+	<script>
+		function getAndroidWebViewVersion() {
+			const userAgent = navigator.userAgent;
+
+			// 安卓 WebView 版本检测
+			const isAndroid = /Android/.test(userAgent);
+			if (isAndroid) {
+				const match = userAgent.match(/; wv\((\d+\.\d+)\)/);
+				if (match) {
+					return match[1];
+				}
+			}
+
+			// iOS WebView 版本检测
+			const isiOS = /(iPhone|iPod|iPad)/.test(userAgent);
+			if (isiOS) {
+				const appleWebkitVersion = userAgent.match(/AppleWebKit\/(\d+)/);
+				if (appleWebkitVersion && appleWebkitVersion[1]) {
+					return `iOS ${appleWebkitVersion[1]}`;
+				}
+			}
+
+			// PC Chrome 版本检测
+			const isChrome = /Chrome/.test(userAgent);
+			if (isChrome) {
+				const chromeVersion = userAgent.match(/Chrome\/(\d+\.\d+\.\d+\.\d+)/);
+				if (chromeVersion && chromeVersion[1]) {
+					return `Chrome ${chromeVersion[1]}`;
+				}
+			}
+
+			return null;
+		}
+		// 调用函数获取 WebView 版本号
+		const webViewVersion = getAndroidWebViewVersion();
+		const webviewVersionElement=document.querySelector('#webviewVersion');
+		webviewVersionElement.innerText=`webViewVersion: ${webViewVersion}`;
+	</script>
 	<script>
 		import("/module/main-a.js");
 		import("/module/main-b.js");
