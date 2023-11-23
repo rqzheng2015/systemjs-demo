@@ -70,21 +70,23 @@
     webviewVersionElement.innerText = `webViewVersion: ${webViewVersion}`;
 </script>
 <script>
-    var errorMessageElement = document.querySelector("#errorMessage")
-    var methodDocument = document.querySelector('#method');
+
     try {
         import("/module/main-a.js");
         import("/module/main-b.js");
         window.supportsDynamicImport = true;
+        var methodDocument = document.querySelector('#method');
         methodDocument.innerText = "Import Method: Dynamic import";
     } catch (error) {
         console.log(error);
+        var errorMessageElement = document.querySelector("#errorMessage")
         errorMessageElement.innerText = `Error message: ${error.message}`;
     }
 </script>
 <script>
     try {
         if (!window.supportsDynamicImport) {
+            var methodDocument = document.querySelector('#method');
             methodDocument.innerText = "Switching to SystemJS";
             var systemJsLoaderTag = document.createElement('script');
             systemJsLoaderTag.src = 'https://unpkg.com/systemjs@latest/dist/s.min.js';
@@ -97,6 +99,7 @@
         }
     } catch (error) {
         console.log(error);
+        var errorMessageElement = document.querySelector("#errorMessage")
         errorMessageElement.innerText = `Error message: ${error.message}`;
     }
 </script>
