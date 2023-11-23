@@ -69,20 +69,20 @@
     var webviewVersionElement = document.querySelector('#webviewVersion');
     webviewVersionElement.innerText = `webViewVersion: ${webViewVersion}`;
 </script>
-<script>
+<!--<script>-->
 
-    try {
-        import("/module/main-a.js");
-        import("/module/main-b.js");
-        window.supportsDynamicImport = true;
-        var methodDocument = document.querySelector('#method');
-        methodDocument.innerText = "Import Method: Dynamic import";
-    } catch (error) {
-        console.log(error);
-        var errorMessageElement = document.querySelector("#errorMessage")
-        errorMessageElement.innerText = `Error message: ${error.message}`;
-    }
-</script>
+<!--    try {-->
+<!--        import("/module/main-a.js");-->
+<!--        import("/module/main-b.js");-->
+<!--        window.supportsDynamicImport = true;-->
+<!--        var methodDocument = document.querySelector('#method');-->
+<!--        methodDocument.innerText = "Import Method: Dynamic import";-->
+<!--    } catch (error) {-->
+<!--        console.log(error);-->
+<!--        var errorMessageElement = document.querySelector("#errorMessage")-->
+<!--        errorMessageElement.innerText = `Error message: ${error.message}`;-->
+<!--    }-->
+<!--</script>-->
 <script>
     try {
         if (!window.supportsDynamicImport) {
