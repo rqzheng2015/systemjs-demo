@@ -8,12 +8,14 @@
 	<title>Rollup code-splitting demo</title>
 
 	<link rel='stylesheet' href='styles.css'>
+
+
 </head>
 <body>
 	<h1>Rollup code-splitting demo</h1>
 
 	<p><a href='https://github.com/rollup/rollup-starter-code-splitting'>See the source code on GitHub</a></p>
-	<p id="method"></p>
+	<p id="method">Not applied to any import methods yet.</p>
 	<p id="webviewVersion"></p>
 	<div id='a'>
 		<div data-used-by='a'></div>
@@ -24,62 +26,65 @@
 		<div data-used-by='b'></div>
 		<div data-used-by='both'></div>
 	</div>
-
+	<script src="https://unpkg.com/vconsole@latest/dist/vconsole.min.js"></script>
+	<script>
+		new window.VConsole();
+	</script>
 	<script>
 		function getAndroidWebViewVersion() {
-			const userAgent = navigator.userAgent;
+			var userAgent = navigator.userAgent;
 
 			// 安卓 WebView 版本检测
-			const isAndroid = /Android/.test(userAgent);
+			var isAndroid = /Android/.test(userAgent);
 			if (isAndroid) {
-				const match = userAgent.match(/; wv\((\d+\.\d+)\)/);
+				var match = userAgent.match(/; wv\((\d+\.\d+)\)/);
 				if (match) {
 					return match[1];
 				}
 			}
 
 			// iOS WebView 版本检测
-			const isiOS = /(iPhone|iPod|iPad)/.test(userAgent);
+			var isiOS = /(iPhone|iPod|iPad)/.test(userAgent);
 			if (isiOS) {
-				const appleWebkitVersion = userAgent.match(/AppleWebKit\/(\d+)/);
+				var appleWebkitVersion = userAgent.match(/AppleWebKit\/(\d+)/);
 				if (appleWebkitVersion && appleWebkitVersion[1]) {
 					return `iOS ${appleWebkitVersion[1]}`;
 				}
 			}
 
 			// PC Chrome 版本检测
-			const isChrome = /Chrome/.test(userAgent);
+			var isChrome = /Chrome/.test(userAgent);
 			if (isChrome) {
-				const chromeVersion = userAgent.match(/Chrome\/(\d+\.\d+\.\d+\.\d+)/);
+				var chromeVersion = userAgent.match(/Chrome\/(\d+\.\d+\.\d+\.\d+)/);
 				if (chromeVersion && chromeVersion[1]) {
 					return `Chrome ${chromeVersion[1]}`;
 				}
 			}
-
 			return null;
 		}
 		// 调用函数获取 WebView 版本号
-		const webViewVersion = getAndroidWebViewVersion();
-		const webviewVersionElement=document.querySelector('#webviewVersion');
+		var webViewVersion = getAndroidWebViewVersion();
+		var webviewVersionElement=document.querySelector('#webviewVersion');
 		webviewVersionElement.innerText=`webViewVersion: ${webViewVersion}`;
 	</script>
 	<script>
 		import("/module/main-a.js");
 		import("/module/main-b.js");
 		window.supportsDynamicImport = true;
-		const methodDocument=document.querySelector('#method');
-		methodDocument.innerText="Dynamic import";
+		var methodDocument=document.querySelector('#method');
+		methodDocument.innerText="Import Method: Dynamic import";
 	</script>
 	<script>
 		if (!window.supportsDynamicImport) {
-			methodDocument.innerText="Systemjs";
-			const systemJsLoaderTag = document.createElement('script');
+			methodDocument.innerText="Switching to SystemJS";
+			var systemJsLoaderTag = document.createElement('script');
 			systemJsLoaderTag.src = 'https://unpkg.com/systemjs@6.14.2/dist/s.min.js';
 			systemJsLoaderTag.addEventListener('load', function () {
 				System.import('./nomodule/main-a.js');
 				System.import('./nomodule/main-b.js');
 			});
 			document.head.appendChild(systemJsLoaderTag);
+			methodDocument.innerText="Import Method: SystemJS";
 		}
 	</script>
 </body>
