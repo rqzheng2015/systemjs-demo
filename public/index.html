@@ -71,11 +71,11 @@
 </script>
 <script>
     var errorMessageElement = document.querySelector("#errorMessage")
+    var methodDocument = document.querySelector('#method');
     try {
         import("/module/main-a.js");
         import("/module/main-b.js");
         window.supportsDynamicImport = true;
-        var methodDocument = document.querySelector('#method');
         methodDocument.innerText = "Import Method: Dynamic import";
     } catch (error) {
         console.log(error);
